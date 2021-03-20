@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
 class Repository implements RepositoryInterface
 {
@@ -44,11 +43,6 @@ class Repository implements RepositoryInterface
     public function show($id)
     {
         return $this->model->findOrFail($id);
-    }
-
-    // remove thumbnail from the storage with the given id
-    public function deleteThumbnailFromStorage($id) {
-        return Storage::disk('public')->delete('/thumbnails/' . $this->model->find($id)->thumbnail);
     }
     
     // Get the associated model

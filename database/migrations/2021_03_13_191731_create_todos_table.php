@@ -13,8 +13,10 @@ class CreateTodosTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->boolean('finished')->default(false);
             $table->string('thumbnail')->nullable()->default(null);
             $table->string('thumbnail_path')->nullable()->default(null);

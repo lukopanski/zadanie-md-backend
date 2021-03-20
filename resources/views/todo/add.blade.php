@@ -3,18 +3,31 @@
 @section('title', 'Add')
 
 @section('content')
-<div class="container-fluid text-center">
-    <a href="/" class="btn btn-outline-primary">Back</a>
-    <div class="row">
-        <div class="col col-12 col-md-10 col-lg-8 col-xl-6 offset-md-1 offset-lg-2 offset-xl-3">
-            <h1 class="h1 my-5">Add TODO</h1>
-            <form action="/create" method="post">
-                @csrf
-                <div class="mb-3">
-                    <input type="text" name="task" class="form-control" />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Add new task') }}</div>
+
+                <div class="card-body">
+                    <form action="{{ route('todo.create') }}" method="post">
+                        @csrf
+                        <div class="form-group row">
+                            <label for="task" class="col-md-4 col-form-label text-md-right">{{ __('Task') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="task" name="task" class="form-control" rows="3" maxlength="50"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-success">
+                                    {{ __('Add') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <input type="submit" value="Add" class="btn btn-outline-success" />
-            </form>
+            </div>
         </div>
     </div>
 </div>

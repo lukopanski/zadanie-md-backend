@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +16,17 @@ use App\Http\Controllers\TodoController;
 |
 */
 
-Route::get('/', [TodoController::class, 'index']);
-Route::get('/add', [TodoController::class, 'add']);
-Route::get('/edit/{id}', [TodoController::class, 'edit']);
+Auth::routes(['register' => false]);
 
-Route::post('/create', [TodoController::class, 'createTodo']);
-Route::patch('/update/{id}', [TodoController::class, 'updateTodo']);
-Route::get('/finish/{id}', [TodoController::class, 'finishTodo']);
-Route::delete('/delete/{id}', [TodoController::class, 'deleteTodo']);
+Route::get('/', function() {
+    return view('index');
+})->name('index');
+
+Route::get('/todos', [UserController::class, 'getTodos'])->name('user.todos');
+
+Route::get('/add', [TodoController::class, 'add'])->name('todo.add');
+Route::get('/edit/{id}', [TodoController::class, 'edit'])->name('todo.edit');
+Route::post('/create', [TodoController::class, 'createTodo'])->name('todo.create');
+Route::patch('/update/{id}', [TodoController::class, 'updateTodo'])->name('todo.update');
+Route::get('/finish/{id}', [TodoController::class, 'finishTodo'])->name('todo.finish');
+Route::delete('/delete/{id}', [TodoController::class, 'deleteTodo'])->name('todo.delete');

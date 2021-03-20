@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Todo extends Model
 {
     use HasFactory;
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'finished',
         'task',
         'thumbnail',
@@ -108,4 +109,11 @@ class Todo extends Model
         $this->attributes['thumbnail_path'] = $value;
     }
 
+    /**
+     * Get the user that owns the todo.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
